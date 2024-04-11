@@ -20,6 +20,10 @@ ENV streamlinkCommit=8d73b096066e3a84af4057f5aa589f7a65e5ab34
 RUN apt-get update && apt-get install gosu && apt-get install python3-pip -y
 
 RUN pip3 install --upgrade git+https://github.com/streamlink/streamlink.git@${streamlinkCommit}
+ 
+ENV INSTALL_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/streamlink/plugins"
+RUN mkdir -p "$INSTALL_DIR"
+RUN curl -L -o "$INSTALL_DIR"/twitch.py 'https://github.com/2bc4/streamlink-ttvlol/releases/latest/download/twitch.py'
 
 RUN  echo 'export PATH="${HOME}/.local/bin:${PATH}"'
 
