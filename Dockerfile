@@ -1,5 +1,4 @@
 FROM python:3.13
-LABEL maintainer="lauwarm@mailbox.org"
 
 ENV streamlinkCommit=98991c1
 
@@ -19,7 +18,6 @@ RUN  echo 'export PATH="${HOME}/.local/bin:${PATH}"'
 
 RUN mkdir /home/download
 RUN mkdir /home/script
-RUN mkdir /home/plugins
 
 COPY ./streamlink-recorder.sh /home/script/
 COPY ./entrypoint.sh /home/script
@@ -28,4 +26,4 @@ RUN ["chmod", "+x", "/home/script/entrypoint.sh"]
 
 ENTRYPOINT [ "/home/script/entrypoint.sh" ]
 
-CMD /bin/sh ./home/script/streamlink-recorder.sh ${streamOptions} ${streamLink} ${streamQuality} ${streamName}
+CMD /bin/sh ./home/script/streamlink-recorder.sh
