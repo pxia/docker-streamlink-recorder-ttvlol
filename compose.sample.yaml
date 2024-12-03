@@ -1,0 +1,14 @@
+services:
+  streamlink-recorder:
+    # image: ghcr.io/pxia/docker-streamlink-recorder-ttvlol:main
+    build: 
+      context: .
+    volumes:
+      - ./recordings:/home/download
+    environment:
+      - streamLink=
+      - streamName=
+      - streamQuality=best
+      - streamOptions=--twitch-proxy-playlist=https://eu.luminous.dev,https://eu2.luminous.dev,https://as.luminous.dev
+      # - uid=1026
+      # - gid=100

@@ -1,21 +1,11 @@
-FROM python:3.12.2
+FROM python:3.13
 LABEL maintainer="lauwarm@mailbox.org"
 
-ENV streamlinkCommit=8d73b096066e3a84af4057f5aa589f7a65e5ab34
+ENV streamlinkCommit=98991c1
 
-#ENV streamlinkVersion=6.4.2
-#ENV PATH "${HOME}/.local/bin:${PATH}"
+ENV HOME "/home"
+ENV PATH "${HOME}/.local/bin:${PATH}"
 
-#ADD https://github.com/streamlink/streamlink/releases/download/${streamlinkVersion}/streamlink-${streamlinkVersion}.tar.gz /opt/
-
-#RUN apt-get update && apt-get install gosu
-
-#RUN pip3 install versioningit
-
-#RUN tar -xzf /opt/streamlink-${streamlinkVersion}.tar.gz -C /opt/ && \
-#	rm /opt/streamlink-${streamlinkVersion}.tar.gz && \
-#	cd /opt/streamlink-${streamlinkVersion}/ && \
-#	python3 setup.py install
 
 RUN apt-get update && apt-get install gosu && apt-get install python3-pip -y
 
@@ -30,9 +20,6 @@ RUN  echo 'export PATH="${HOME}/.local/bin:${PATH}"'
 RUN mkdir /home/download
 RUN mkdir /home/script
 RUN mkdir /home/plugins
-
-#RUN git clone https://github.com/Damianonymous/streamlink-plugins.git
-#RUN cp /streamlink-plugins/*.py /home/plugins/
 
 COPY ./streamlink-recorder.sh /home/script/
 COPY ./entrypoint.sh /home/script
